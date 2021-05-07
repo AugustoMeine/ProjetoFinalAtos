@@ -16,7 +16,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @CrossOrigin
-@Api(value = "Swagger2RestController",description = "API do controle do Usuario no banco de dados")
+@Api(value = "Swagger2RestController",description = "API para gerenciamento dos usuários")
 @RestController
 @RequestMapping("/Usuario")
 public class UsuarioController {
@@ -44,7 +44,7 @@ public class UsuarioController {
 		
 		for(Usuario aux : listaUsuario) {
 			if(aux.getNome().equals(nome) || aux.getEmail().equals(email)) {
-				return("Usuário inválido!!!");
+				return("Usuário já existe!!!");
 			}
 		}
 		
@@ -96,7 +96,7 @@ public class UsuarioController {
 				
 				for(Usuario aux : listaUsuario) {
 					if(aux.getNome().equals(nome) || aux.getEmail().equals(email)) {
-						return("Atualização inválida!!!");
+						return("Dados inválidos!!!");
 					}
 				}
 				
