@@ -43,25 +43,32 @@ public class MensagemController {
 		return(mRepository.findById(idMensagem));
 	}
 	
-	@ApiOperation(value = "Retorna a mensagem com o id como parâmetro", response = Iterable.class, tags = "adicionaMensagem")
+	@ApiOperation(value = "Adiciona uma mensagem", response = Iterable.class, tags = "adicionaMensagem")
 	@GetMapping("/Adicionar/{idUsuarioRemetente}/{idUsuarioDestinatario}/{mensagem}")
 	public String adicionaMensagem(@PathVariable long idUsuarioRemetente, @PathVariable long idUsuarioDestinatario, @PathVariable String mensagem){
 		
 		Mensagem novaMensagem = new Mensagem();
-		Usuario usuarioRemetente = uRepository.getOne(idUsuarioRemetente);
+		List<Usuario> listaUsuario = uRepository.findAll();
 		Usuario usuarioDestinatario = uRepository.getOne(idUsuarioDestinatario);
+		Usuario usuarioRemetente = uRepository.getOne(idUsuarioRemetente);
+		boolean destinatario = false;
+		boolean remetente = false;
 		
-		//Verifica se o usuário remetente existe 
-		if(usuarioRemetente == null) {
-			return("Usuário remetente não existe!!!");
+		//Verifica se o usuário remetente e o usuário destinatário existem
+		for(Usuario auxUsuario : listaUsuario) {
+			if(auxUsuario.getIdUsuario() == idUsuarioDestinatario) {
+				destinatario = true;
+			}
+			if(auxUsuario.getIdUsuario() == idUsuarioRemetente) {				
+				remetente = true;
+			}
 		}
-		//Verifica se o usuário destinatário existe 
-		if(usuarioDestinatario == null) {
-			return("Usuário destinatário não existe!!!");
+		if((destinatario == false) || (remetente == false)){
+			return("Usuário destinatário e/ou remetente não existe!!!");
 		}
 		
 		//Verifica se o usuário remetente é o mesmo usuário destinatário
-		if(usuarioRemetente.getIdUsuario() == usuarioDestinatario.getIdUsuario()) {
+		if(idUsuarioDestinatario == idUsuarioRemetente) {
 			return("Usuário remetente e usuário destinatário não podem ser o mesmo usuário!!!");
 		}
 		

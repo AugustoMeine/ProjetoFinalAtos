@@ -1,1 +1,10 @@
-/* You can add global styles to this file, and also import other style files */
+.header{
+    width: 100%;
+    height: min-content;
+    margin: 0 auto;
+    background-color: grey;
+    border:2px solid black;
+    color: darkred;
+    text-align: center;
+    vertical-align: middle;
+}

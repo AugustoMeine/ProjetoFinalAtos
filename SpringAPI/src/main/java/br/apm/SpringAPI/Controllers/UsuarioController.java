@@ -38,19 +38,19 @@ public class UsuarioController {
 	
 	@ApiOperation(value = "Adiciona um Usuário", response = Iterable.class, tags = "adicionaUsuario")
 	@GetMapping("/Adicionar/{nome}/{email}/{senha}")
-	public String adicionaUsuario(@PathVariable String nome, @PathVariable String email, @PathVariable String senha){
+	public Usuario adicionaUsuario(@PathVariable String nome, @PathVariable String email, @PathVariable String senha){
 		List<Usuario> listaUsuario = uRepository.findAll();
 		Usuario novoUsuario = new Usuario();
 		
 		for(Usuario aux : listaUsuario) {
 			if(aux.getNome().equals(nome) || aux.getEmail().equals(email)) {
-				return("Usuário já existe!!!");
+				return(null);
 			}
 		}
 		
 		//Adiciona o nome
 		if(nome.isBlank()) {
-			return("Nome inválido!!!");
+			return(null);
 		}
 		else {
 			novoUsuario.setNome(nome);
@@ -58,7 +58,7 @@ public class UsuarioController {
 		
 		//Adiciona o e-mail
 		if(email.isBlank()) {
-			return("E-mail inválido!!!");
+			return(null);
 		}
 		else {
 			novoUsuario.setEmail(email);
@@ -66,7 +66,7 @@ public class UsuarioController {
 		
 		//Adiciona a senha
 		if(senha.isBlank()) {
-			return("Senha inválido!!!");
+			return(null);
 		}
 		else {
 			novoUsuario.setSenha(senha);
@@ -81,12 +81,12 @@ public class UsuarioController {
 		//salva o usuário
 		uRepository.save(novoUsuario);		
 		
-		return("Usuário adicionado!!!");
+		return(novoUsuario);
 	}
 	
 	@ApiOperation(value = "Atualiza o Usuário", response = Iterable.class, tags = "atualizaUsuario")
 	@GetMapping("Atualizar/{idUsuario}/{nome}/{email}/{senha}")
-	public String atualizaUsuario(@PathVariable long idUsuario, @PathVariable String nome, @PathVariable String email, @PathVariable String senha){
+	public Usuario atualizaUsuario(@PathVariable long idUsuario, @PathVariable String nome, @PathVariable String email, @PathVariable String senha){
 		List<Usuario> listaUsuario = uRepository.findAll();
 		Usuario novoUsuario = new Usuario();
 
@@ -96,7 +96,7 @@ public class UsuarioController {
 				
 				for(Usuario aux : listaUsuario) {
 					if(aux.getNome().equals(nome) || aux.getEmail().equals(email)) {
-						return("Dados inválidos!!!");
+						return(null);
 					}
 				}
 				
@@ -105,7 +105,7 @@ public class UsuarioController {
 				
 				//Adiciona o nome
 				if(nome.isBlank()) {
-					return("Nome inválido!!!");
+					return(null);
 				}
 				else {
 					novoUsuario.setNome(nome);
@@ -113,7 +113,7 @@ public class UsuarioController {
 				
 				//Adiciona o e-mail
 				if(email.isBlank()) {
-					return("E-mail inválido!!!");
+					return(null);
 				}
 				else {
 					novoUsuario.setEmail(email);
@@ -121,7 +121,7 @@ public class UsuarioController {
 				
 				//Adiciona a senha
 				if(senha.isBlank()) {
-					return("Senha inválida!!!");
+					return(null);
 				}
 				else {
 					novoUsuario.setSenha(senha);
@@ -136,11 +136,11 @@ public class UsuarioController {
 				//salva o usuário
 				uRepository.save(novoUsuario);		
 				
-				return("Usuário adicionado!!!");
+				return(novoUsuario);
 			}
 		}
 		
-		return("Usuário não encontrado!!!");			
+		return(null);			
 	}
 	
 	@ApiOperation(value = "Deleta o Usuário com o id como parâmetro", response = Iterable.class, tags = "deletaUsuario")

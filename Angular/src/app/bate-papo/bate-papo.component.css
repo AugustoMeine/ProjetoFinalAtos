@@ -1,0 +1,96 @@
+.sectionBatePapo{
+    margin: 0 auto;
+    height: 86vh;
+    background-color:rgb(42, 42, 42);
+    color: rgb(20, 187, 20);
+    border:2px solid black;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+
+}
+
+.divBatePapo{
+    float:left;
+    width: 90%;
+    height: 100%;
+}
+
+.divBatePapoConversa{
+    border:1px solid black;
+    width: 100%;
+    height: 80%;
+}
+
+.divBatePapoMensagem{
+    border:1px solid black;
+    width: 100%;
+    height: 20%;
+}
+.divBatePapoMensagemTexto{
+    width: 80%;
+    height: 100%;
+    float: left;
+}
+
+.divBatePapoMensagemBotaoEnviar{
+    width: 20%;
+    height: 50%;
+    float: right;
+}
+
+.divBatePapoMensagemBotaoLimpar{
+    width: 20%;
+    height: 50%;
+    float: right;
+}
+.divAmigos{
+    border:1px solid black;
+    float:right;
+    width: 10%;
+    height: 100%;
+}
+
+.divAmigosLista{
+    border:1px solid black;
+    width: 100%;
+    height: 80%;
+    text-align: center;
+}
+
+.divAmigosGerenciamento{
+    border:1px solid black;
+    width: 100%;
+    height: 20%;
+}
+
+.divAmigosGerenciamentoNome{
+    border:1px solid black;
+    width: 100%;
+    height: 40%;
+    margin-top: 2.5%;
+    margin-bottom: 2.5%;
+    
+}
+
+.divAmigosGerenciamentoNomeBotao{
+    border:1px solid black;
+    width: 100%;
+    height: 50%;
+}
+
+.divAmigosGerenciamentoNomeBotaoAdicionar{
+    border:1px solid black;
+    width: 50%;
+    height: 100%;
+    float: left;
+}
+
+.divAmigosGerenciamentoNomeBotaoDeletar{
+    border:1px solid black;
+    width: 50%;
+    height: 100%;
+    float: right;
+}

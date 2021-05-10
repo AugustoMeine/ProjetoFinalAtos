@@ -1,0 +1,32 @@
+<header class="header">
+    <h1>Perfil</h1>
+</header>
+
+<div class="sectionCadastro">
+    <div class="divCadastro">
+        <div class="p-field p-grid">
+            <label for="nome" class="p-col-fixed" style="width:100px">Nome</label>
+            <div class="p-col">
+                <input [disabled]="!atualizando" id="nome" type="text" pInputText [(ngModel)]="nome"> 
+            </div>
+        </div>
+
+        <div class="p-field p-grid">
+            <label for="email" class="p-col-fixed" style="width:100px">E-mail</label>
+            <div class="p-col">
+                <input [disabled]="!atualizando" id="email" type="email" pInputText [(ngModel)]="email"> 
+            </div>
+        </div>
+
+        <div class="p-field p-grid">
+            <label for="senha" class="p-col-fixed" style="width:100px">Senha</label>
+            <div class="p-col">
+                <input [disabled]="!atualizando" id="senha" type="password" pInputText [(ngModel)]="senha"> 
+            </div>
+        </div>
+
+        <br>
+        <button pButton type="button" label="{{primeiroBotao}}" (click)="primeiroBotaoFuncao()"></button>
+        <button pButton type="button" label="{{segundoBotao}}" (click)="segundoBotaoFuncao()"></button>
+    </div>
+</div>

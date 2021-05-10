@@ -1,0 +1,25 @@
+button{
+    margin-right: 5px;
+    margin-top: 5px;
+}
+
+.sectionLogin{
+    margin: 0 auto;
+    height: 86vh;
+    background-color:rgb(42, 42, 42);
+    color: rgb(20, 187, 20);
+    border:2px solid black;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+
+}
+.divLogin{
+    padding:1%;
+    border:2px solid black;
+    font-size: 30px;
+    text-align: center;
+    vertical-align: middle;  
+}

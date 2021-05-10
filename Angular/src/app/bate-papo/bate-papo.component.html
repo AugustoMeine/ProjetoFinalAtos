@@ -1,0 +1,57 @@
+<header class="header">
+   <h1>Bate-papo</h1>
+</header>
+<div class="sectionBatePapo">
+    <!-- Área do bate-papo -->
+    <div class="divBatePapo">
+        <!-- Parte superior (Área do bate-papo) -->
+        <div class="divBatePapoConversa">
+            <div class="card">
+                <p-table [scrollable]="true" scrollHeight="200px"> 
+                    <ng-template pTemplate="body" let-customer>
+                        <tr *ngFor="let mensagem of listaMensagem">
+                            <td>{{mensagem.data}} - {{mensagem.hora}}</td>
+                            <td>{{mensagem.mensagem}}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+        <!-- Parte inferior (Área da mensagem) -->
+        <div class="divBatePapoMensagem">
+            <textarea pInputTextarea [(ngModel)]="mensagemTextArea" class="divBatePapoMensagemTexto"></textarea>
+
+            <button pButton type="button" label="Enviar" class="p-button-success
+            divBatePapoMensagemBotaoEnviar"></button>
+            <button pButton type="button" label="Limpar" class="p-button-info divBatePapoMensagemBotaoLimpar"></button>
+        </div>
+    </div>
+    <!-- Área para o gerenciamento de amigos -->
+    <div class="divAmigos">
+        <!-- Parte superior -->
+        <div class="divAmigosLista">
+            <div class="card">
+                <p-table [scrollable]="true" scrollHeight="200px">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th>Lista De Amigos</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-customer>
+                        <tr *ngFor="let nome of listaAmigosAdicionados">
+                            <td>{{nome}}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div> 
+        </div>
+        <!-- Parte inferior -->
+        <div class="divAmigosGerenciamento">
+            <input class="divAmigosGerenciamentoNome" type="text" pInputText [(ngModel)]="nomeUsuarioGerenciamento" autocomplete="off"/>
+            <div class="divAmigosGerenciamentoNomeBotao">
+                <button pButton type="button" icon="pi pi-check" class="p-button-success divAmigosGerenciamentoNomeBotaoAdicionar"></button>
+                <button pButton type="button" icon="pi pi-times" class="p-button-danger divAmigosGerenciamentoNomeBotaoDeletar"></button>
+            </div>
+        </div>
+    </div>
+</div>
