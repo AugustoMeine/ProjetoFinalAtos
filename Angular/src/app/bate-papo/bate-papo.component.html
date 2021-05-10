@@ -38,7 +38,7 @@
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-customer>
-                        <tr *ngFor="let nome of listaAmigosAdicionados">
+                        <tr *ngFor="let nome of listaAmigo">
                             <td>{{nome}}</td>
                         </tr>
                     </ng-template>
@@ -49,8 +49,8 @@
         <div class="divAmigosGerenciamento">
             <input class="divAmigosGerenciamentoNome" type="text" pInputText [(ngModel)]="nomeUsuarioGerenciamento" autocomplete="off"/>
             <div class="divAmigosGerenciamentoNomeBotao">
-                <button pButton type="button" icon="pi pi-check" class="p-button-success divAmigosGerenciamentoNomeBotaoAdicionar"></button>
-                <button pButton type="button" icon="pi pi-times" class="p-button-danger divAmigosGerenciamentoNomeBotaoDeletar"></button>
+                <button pButton type="button" icon="pi pi-check" class="p-button-success divAmigosGerenciamentoNomeBotaoAdicionar" (click)="adicionarAmigo()"></button>
+                <button pButton type="button" icon="pi pi-times" class="p-button-danger divAmigosGerenciamentoNomeBotaoDeletar" (click)="deletarAmigo()"></button>
             </div>
         </div>
     </div>

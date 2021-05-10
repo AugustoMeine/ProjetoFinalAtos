@@ -31,7 +31,16 @@ export class LoginComponent implements OnInit {
         if(this.usuario){
           for(let aux of this.usuario){
             if((this.email === aux.email) && (this.senha === aux.senha)){
-              this.router.navigate(['Bate-papo']);
+              this.usuarioServico.logaUsuario(aux.idUsuario).subscribe(
+                (data: Usuario)=>{
+                  console.log("Data >> " + data)
+                  this.router.navigate(['Bate-papo'])
+                },
+                (error: any)=>{
+                  this.erro = error
+                  console.log("Erro >> " + error)
+                }
+              )
             }
           }
         }

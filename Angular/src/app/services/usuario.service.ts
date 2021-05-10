@@ -32,5 +32,13 @@ export class UsuarioService {
     return(this.http.get('http://localhost:8080/Usuario/Deletar/'+ idUsuario))
   }
 
+  public logaUsuario(idUsuario: number):Observable<any>{
+    return(this.http.get('http://localhost:8080/Usuario/Logar/'+ idUsuario))
+  }
+
+  public deslogaUsuario(idUsuario: number):Observable<any>{
+    return(this.http.get('http://localhost:8080/Usuario/Deslogar/'+ idUsuario))
+  }
+
   
 }

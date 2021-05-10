@@ -157,4 +157,36 @@ public class UsuarioController {
 		}
 		return("Usuário não encontrado!!!");
 	}
+	
+	@ApiOperation(value = "Altera o Usuário para LOGADO com o id como parâmetro", response = Iterable.class, tags = "logaUsuario")
+	@GetMapping("/Logar/{idUsuario}")
+	public Usuario logaUsuario(@PathVariable long idUsuario){
+		List<Usuario> listaUsuario = uRepository.findAll();
+	
+		//Verifica se o idUsuario existe
+		for(Usuario auxId : listaUsuario) {
+			if(auxId.getIdUsuario() == idUsuario) {
+				auxId.setLogado(true);
+				uRepository.save(auxId);
+				return(auxId);
+			}
+		}
+		return(null);
+	}
+	
+	@ApiOperation(value = "Altera o Usuário para DESLOGADO com o id como parâmetro", response = Iterable.class, tags = "deslogaUsuario")
+	@GetMapping("/Deslogar/{idUsuario}")
+	public Usuario deslogaUsuario(@PathVariable long idUsuario){
+		List<Usuario> listaUsuario = uRepository.findAll();
+	
+		//Verifica se o idUsuario existe
+		for(Usuario auxId : listaUsuario) {
+			if(auxId.getIdUsuario() == idUsuario) {
+				auxId.setLogado(false);
+				uRepository.save(auxId);
+				return(auxId);
+			}
+		}
+		return(null);
+	}
 }
