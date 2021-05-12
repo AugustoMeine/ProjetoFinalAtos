@@ -1,3 +1,4 @@
+import { UsuarioLogadoService } from './../services/usuario-logado.service';
 import { UsuarioService } from './../services/usuario.service';
 import { Usuario } from './../models/Usuario.model';
 import { Router } from '@angular/router';
@@ -17,7 +18,7 @@ export class LoginComponent implements OnInit {
   email: string
   senha: string
 
-  constructor(private usuarioServico:UsuarioService, router:Router) { 
+  constructor(private usuariologadoServico: UsuarioLogadoService, private usuarioServico:UsuarioService, router:Router) { 
     this.router = router
   }
 
@@ -34,6 +35,7 @@ export class LoginComponent implements OnInit {
               this.usuarioServico.logaUsuario(aux.idUsuario).subscribe(
                 (data: Usuario)=>{
                   console.log("Data >> " + data)
+                  this.usuariologadoServico.setUsuarioLogado(data)
                   this.router.navigate(['Bate-papo'])
                 },
                 (error: any)=>{

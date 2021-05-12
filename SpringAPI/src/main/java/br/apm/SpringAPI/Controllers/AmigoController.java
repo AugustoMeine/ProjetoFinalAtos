@@ -42,7 +42,7 @@ public class AmigoController {
 	
 	@ApiOperation(value = "Adiciona um amigo", response = Iterable.class, tags = "adicionaAmigo")
 	@GetMapping("/Adicionar/{idUsuarioPerfil}/{idUsuarioAmigo}")
-	public String adicionaAmigo(@PathVariable long idUsuarioPerfil , @PathVariable long idUsuarioAmigo){
+	public Amigo adicionaAmigo(@PathVariable long idUsuarioPerfil , @PathVariable long idUsuarioAmigo){
 		List<Usuario> listaUsuario = uRepository.findAll();
 		List<Amigo> listaAmigo = aRepository.findByIdUsuarioPerfil(idUsuarioPerfil);
 		Amigo novoAmigo = new Amigo();
@@ -51,7 +51,8 @@ public class AmigoController {
 		
 		//Verifica se o usuário perfil é o mesmo usuário amigo
 		if(idUsuarioAmigo == idUsuarioPerfil) {
-			return("Os usuários não podem ser o mesmo!!!");
+			System.out.println("1");
+			return(null);
 		}
 		
 		//Verifica se o usuário perfil e o usuário amigo existem
@@ -64,13 +65,15 @@ public class AmigoController {
 			}
 		}
 		if((perfil == false) || (amigo == false)){
-			return("Usuário(s) inserido(s) não existe(m)!!!");
+			System.out.println("2");
+			return(null);
 		}
 		
 		//Verifica se o usuário amigo já foi adicionado
 		for(Amigo auxAmigo: listaAmigo) {
 			if(auxAmigo.getIdUsuarioAmigo() == idUsuarioAmigo) {
-				return("Amigo já existente!!!");
+				System.out.println("3");
+				return(null);
 			}
 		}
 		
@@ -80,7 +83,7 @@ public class AmigoController {
 
 		aRepository.save(novoAmigo);
 		
-		return("Amigo adicionado!!!");
+		return(novoAmigo);
 	}
 	
 	@ApiOperation(value = "Deleta um amigo", response = Iterable.class, tags = "deletaAmigo")

@@ -21,9 +21,9 @@
         <div class="divBatePapoMensagem">
             <textarea pInputTextarea [(ngModel)]="mensagemTextArea" class="divBatePapoMensagemTexto"></textarea>
 
-            <button pButton type="button" label="Enviar" class="p-button-success
+            <button pButton type="button" label="Enviar" (click)="enviarMensagem()" class="p-button-success
             divBatePapoMensagemBotaoEnviar"></button>
-            <button pButton type="button" label="Limpar" class="p-button-info divBatePapoMensagemBotaoLimpar"></button>
+            <button pButton type="button" label="Limpar" (click)="limparMensagem()" class="p-button-info divBatePapoMensagemBotaoLimpar"></button>
         </div>
     </div>
     <!-- Área para o gerenciamento de amigos -->
@@ -38,8 +38,8 @@
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-customer>
-                        <tr *ngFor="let nome of listaAmigo">
-                            <td>{{nome}}</td>
+                        <tr *ngFor="let nomeAmigo of listaAmigosDoUsuario">
+                            <td>{{nomeAmigo}}</td>
                         </tr>
                     </ng-template>
                 </p-table>

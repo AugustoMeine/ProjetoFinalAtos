@@ -1,7 +1,7 @@
+import { UsuarioLogadoService } from './../services/usuario-logado.service';
 import { Usuario } from './../models/Usuario.model';
 import { UsuarioService } from './../services/usuario.service';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -23,15 +23,22 @@ export class PerfilComponent implements OnInit {
   primeiroBotao: string = "ATUALIZAR"
   segundoBotao: string = "DELETAR"
 
-  constructor(private usuarioServico:UsuarioService, router:Router) { 
+  constructor(private usuarioLogadoServico: UsuarioLogadoService, private usuarioServico:UsuarioService, router:Router) { 
     this.router = router
-
-    // this.nome = this.usuarioLogado.nome
-    // this.email = this.usuarioLogado.email
-    // this.senha = this.usuarioLogado.senha
   }
 
   ngOnInit(): void {
+    //Se não existir usuário logado ele direciona para o login
+    this.usuarioLogado = this.usuarioLogadoServico.getUsuarioLogado()
+    if(this.usuarioLogado){
+      this.nome = this.usuarioLogado.nome
+      this.email = this.usuarioLogado.email
+      this.senha = this.usuarioLogado.senha
+    }
+    else{
+      this.router.navigate([''])
+    }
+    
   }
 
   primeiroBotaoFuncao(){
@@ -51,12 +58,17 @@ export class PerfilComponent implements OnInit {
             console.log("Erro >> " + this.erro)
           }
         )
+        //Salva as informações do usuário no usuarioLogadoService
+        this.usuarioLogado.nome = this.nome
+        this.usuarioLogado.email = this.email
+        this.usuarioLogado.senha = this.senha
+        this.usuarioLogadoServico.setUsuarioLogado(this.usuarioLogado)
+        
+        //Modifica os botões
+        this.primeiroBotao = "ATUALIZAR"
+        this.segundoBotao = "DELETAR"
+        this.atualizando = false
       }
-
-      //Modifica os botões
-      this.primeiroBotao = "ATUALIZAR"
-      this.segundoBotao = "DELETAR"
-      this.atualizando = false
     }
     else{//ATUALIZAR
       //Modifica os botões
@@ -94,4 +106,18 @@ export class PerfilComponent implements OnInit {
       }
     }
   }
+
+  deslogar(){
+    this.usuarioServico.deslogaUsuario(this.usuarioLogado.idUsuario).subscribe(
+      (data: Usuario)=>{
+        console.log("Data >> " + data)
+        this.router.navigate([''])
+      },
+      (error: any)=>{
+        this.erro = error
+        console.log("Erro >> " + error)
+      }
+    )
+  }
+
 }

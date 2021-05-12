@@ -16,7 +16,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
 @CrossOrigin
-@Api(value = "Swagger2RestController",description = "API para gerenciamento dos usuários")
+@Api(value = "Swagger2RestController",description = "API para o gerenciamento dos usuários")
 @RestController
 @RequestMapping("/Usuario")
 public class UsuarioController {
@@ -94,12 +94,6 @@ public class UsuarioController {
 		for(Usuario auxId : listaUsuario) {
 			if(auxId.getIdUsuario() == idUsuario) {
 				
-				for(Usuario aux : listaUsuario) {
-					if(aux.getNome().equals(nome) || aux.getEmail().equals(email)) {
-						return(null);
-					}
-				}
-				
 				//Adiciona o idUsuario
 				novoUsuario.setIdUsuario(idUsuario);
 				
@@ -131,7 +125,7 @@ public class UsuarioController {
 				novoUsuario.setPapel("USER");
 				
 				//Seleciona como deslogado
-				novoUsuario.setLogado(false);
+				novoUsuario.setLogado(true);
 				
 				//salva o usuário
 				uRepository.save(novoUsuario);		
