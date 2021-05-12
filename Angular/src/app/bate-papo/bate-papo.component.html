@@ -6,16 +6,7 @@
     <div class="divBatePapo">
         <!-- Parte superior (Área do bate-papo) -->
         <div class="divBatePapoConversa">
-            <div class="card">
-                <p-table [scrollable]="true" scrollHeight="200px"> 
-                    <ng-template pTemplate="body" let-customer>
-                        <tr *ngFor="let mensagem of listaMensagem">
-                            <td>{{mensagem.data}} - {{mensagem.hora}}</td>
-                            <td>{{mensagem.mensagem}}</td>
-                        </tr>
-                    </ng-template>
-                </p-table>
-            </div>
+            <h1>Área do bate-papo</h1>
         </div>
         <!-- Parte inferior (Área da mensagem) -->
         <div class="divBatePapoMensagem">
@@ -28,23 +19,17 @@
     </div>
     <!-- Área para o gerenciamento de amigos -->
     <div class="divAmigos">
-        <!-- Parte superior -->
+        <!-- Parte superior augusto.meine@gmail.com-->
         <div class="divAmigosLista">
-            <div class="card">
-                <p-table [scrollable]="true" scrollHeight="200px">
-                    <ng-template pTemplate="header">
-                        <tr>
-                            <th>Lista De Amigos</th>
-                        </tr>
-                    </ng-template>
-                    <ng-template pTemplate="body" let-customer>
-                        <tr *ngFor="let nomeAmigo of listaAmigosDoUsuario">
-                            <td>{{nomeAmigo}}</td>
-                        </tr>
-                    </ng-template>
-                </p-table>
-            </div> 
-        </div>
+            <h3 class="divAmigosListaTitulo">
+                Lista de amigos
+            </h3>
+            <div class = "divAmigosListaSelecionado">
+                <div *ngFor="let amigo of this.listaAmigosDoUsuario">
+                    <button type="button" class="divAmigosListaSelecionadoOpcoes" (click)="amigoSelecionado(amigo.idUsuario)">{{amigo.nome}}</button>
+                </div>
+            </div>            
+        </div> 
         <!-- Parte inferior -->
         <div class="divAmigosGerenciamento">
             <input class="divAmigosGerenciamentoNome" type="text" pInputText [(ngModel)]="nomeUsuarioGerenciamento" autocomplete="off"/>

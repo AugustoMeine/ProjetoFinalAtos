@@ -14,7 +14,7 @@ import { PerfilComponent } from './perfil/perfil.component';
 import {ButtonModule} from 'primeng/button';
 import {InputTextModule} from 'primeng/inputtext';
 import {InputTextareaModule} from 'primeng/inputtextarea';
-import {TableModule} from 'primeng/table';
+import {ListboxModule} from 'primeng/listbox';
 
 @NgModule({
   declarations: [
@@ -32,7 +32,7 @@ import {TableModule} from 'primeng/table';
     ButtonModule,
     InputTextModule,
     InputTextareaModule,
-    TableModule
+    ListboxModule
   ],
   providers: [],
   bootstrap: [AppComponent]

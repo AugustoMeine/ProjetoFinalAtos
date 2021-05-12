@@ -20,15 +20,17 @@ export class BatePapoComponent implements OnInit {
   listaAmigo: Amigo[]
   listaUsuario: Usuario[]
   listaMensagem: Mensagem[]
+  listaAmigosDoUsuario: Usuario[] 
   usuarioLogado: Usuario
   usuarioConversa: Usuario
-  nomeAmigosDoUsuario: string[]
+  
 
   nomeUsuarioGerenciamento: string
   mensagemTextArea: string
 
   constructor(private usuarioLogadoServico: UsuarioLogadoService, private amigoServico: AmigoService, private usuarioServico: UsuarioService, private mensagemServico: MensagemService, router: Router) { 
     this.router = router
+    this.listaAmigosDoUsuario = []
   }
 
   ngOnInit(): void {
@@ -38,7 +40,7 @@ export class BatePapoComponent implements OnInit {
       this.atualizarListaAmigos()
       this.atualizarListaUsuario()
       this.atualizarListaMensagem()
-      this.atualizarListaNomeAmigosDoUsuario()
+      this.atualizarListaAmigosDoUsuario()
     }
     else{
       this.router.navigate([''])
@@ -85,14 +87,29 @@ export class BatePapoComponent implements OnInit {
     )
   }
 
-  atualizarListaNomeAmigosDoUsuario(){
-    for(let auxAmigo of this.listaAmigo){
-      for(let auxUsuario of this.listaUsuario){
-        if(auxAmigo.idUsuarioAmigo === auxUsuario.idUsuario){
-          this.nomeAmigosDoUsuario.push(auxUsuario.nome)
+  atualizarListaAmigosDoUsuario(){
+    this.amigoServico.getAmigo(this.usuarioLogado.idUsuario).subscribe(
+      (data: Amigo[])=>{
+        this.listaAmigosDoUsuario = []
+        for(let amigo of data){
+          this.usuarioServico.getUsuario(amigo.idUsuarioAmigo).subscribe(
+            (data2: Usuario)=>{
+              this.listaAmigosDoUsuario.push(data2)
+            },
+            (error: any)=>{
+              this.erro = error
+              console.log("Erro >> " + error)
+            }
+          )
         }
+        console.log("Lista de amigos do usuário atualizada >> " + data)
+        console.log(this.listaAmigosDoUsuario)
+      },
+      (error: any)=>{
+        this.erro = error
+        console.log("Erro >> " + error)
       }
-    }
+    )
   }
 
   adicionarAmigo(){
@@ -109,6 +126,7 @@ export class BatePapoComponent implements OnInit {
             (data: Amigo)=>{
               console.log("Amigo Adicionado!!! >> " + data)
               this.atualizarListaAmigos()
+              this.atualizarListaAmigosDoUsuario()
             },
             (error: any)=>{
               this.erro = error
@@ -143,6 +161,10 @@ export class BatePapoComponent implements OnInit {
       }
       console.log("Usuário não existe!!!")
     }
+  }
+
+  amigoSelecionado(idUsuarioAmigo: number){
+    console.log(idUsuarioAmigo)
   }
 
   enviarMensagem(){

@@ -60,6 +60,28 @@
     text-align: center;
 }
 
+.divAmigosListaTitulo{
+    background-color: grey;
+    border:1px solid black;
+    text-align: center;
+    width: 100%;
+    height: 10%;
+    margin: 0;
+    align-items: center;
+}
+
+.divAmigosListaSelecionado{
+    width: 100%;
+    height: 90%;
+    overflow:auto;
+}
+
+.divAmigosListaSelecionadoOpcoes{
+    width: 100%;
+    height: 20%;
+    border-radius: 0px;
+}
+
 .divAmigosGerenciamento{
     border:1px solid black;
     width: 100%;
