@@ -31,8 +31,8 @@ public class UsuarioController {
 	
 	@ApiOperation(value = "Retorna o Usuário com o id como parâmetro", response = Iterable.class, tags = "getUsuario")
 	@GetMapping("/{idUsuario}")
-	public Optional<Usuario> getUsuario(@PathVariable long idUsuario){
-		return(uRepository.findById(idUsuario));
+	public Usuario getUsuario(@PathVariable long idUsuario){
+		return(uRepository.getOne(idUsuario));
 	}
 		
 	

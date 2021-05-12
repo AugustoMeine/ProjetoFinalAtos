@@ -1,12 +1,15 @@
 <header class="header">
-   <h1>Bate-papo</h1>
+    <h1>Bate-papo</h1> 
 </header>
 <div class="sectionBatePapo">
     <!-- Área do bate-papo -->
     <div class="divBatePapo">
         <!-- Parte superior (Área do bate-papo) -->
         <div class="divBatePapoConversa">
-            <h1>Área do bate-papo</h1>
+            <div class="conversas" *ngFor="let mensagem of this.listaMensagensTrocadas">
+                <div class="conversaRemetente" *ngIf="mensagem.idUsuarioRemetente == this.usuarioLogado.idUsuario">{{mensagem.mensagem}} #</div>
+                <div class="conversaDestinatario" *ngIf="mensagem.idUsuarioRemetente == this.usuarioConversa.idUsuario"># {{mensagem.mensagem}} </div>
+            </div>
         </div>
         <!-- Parte inferior (Área da mensagem) -->
         <div class="divBatePapoMensagem">
@@ -19,7 +22,7 @@
     </div>
     <!-- Área para o gerenciamento de amigos -->
     <div class="divAmigos">
-        <!-- Parte superior augusto.meine@gmail.com-->
+        <!-- Parte superior -->
         <div class="divAmigosLista">
             <h3 class="divAmigosListaTitulo">
                 Lista de amigos
@@ -28,7 +31,8 @@
                 <div *ngFor="let amigo of this.listaAmigosDoUsuario">
                     <button type="button" class="divAmigosListaSelecionadoOpcoes" (click)="amigoSelecionado(amigo.idUsuario)">{{amigo.nome}}</button>
                 </div>
-            </div>            
+            </div>
+            <button pButton type="button" label="Perfil" icon="pi pi-user" class="p-button-danger" style="width: 100%;height: 10%;" (click)="perfil()"></button>          
         </div> 
         <!-- Parte inferior -->
         <div class="divAmigosGerenciamento">

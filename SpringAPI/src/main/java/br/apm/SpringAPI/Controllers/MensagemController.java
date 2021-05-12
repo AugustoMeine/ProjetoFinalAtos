@@ -45,7 +45,7 @@ public class MensagemController {
 	
 	@ApiOperation(value = "Adiciona uma mensagem", response = Iterable.class, tags = "adicionaMensagem")
 	@GetMapping("/Adicionar/{idUsuarioRemetente}/{idUsuarioDestinatario}/{mensagem}")
-	public String adicionaMensagem(@PathVariable long idUsuarioRemetente, @PathVariable long idUsuarioDestinatario, @PathVariable String mensagem){
+	public Mensagem adicionaMensagem(@PathVariable long idUsuarioRemetente, @PathVariable long idUsuarioDestinatario, @PathVariable String mensagem){
 		
 		Mensagem novaMensagem = new Mensagem();
 		List<Usuario> listaUsuario = uRepository.findAll();
@@ -64,17 +64,17 @@ public class MensagemController {
 			}
 		}
 		if((destinatario == false) || (remetente == false)){
-			return("Usuário destinatário e/ou remetente não existe!!!");
+			return(null);
 		}
 		
 		//Verifica se o usuário remetente é o mesmo usuário destinatário
 		if(idUsuarioDestinatario == idUsuarioRemetente) {
-			return("Usuário remetente e usuário destinatário não podem ser o mesmo usuário!!!");
+			return(null);
 		}
 		
 		//Verifica se a mensagem está vazia 
 		if(mensagem.isBlank()) {
-			return("Mensagem inválida");
+			return(null);
 		}
 		
 		//Adiciona o usuário remetente
@@ -96,7 +96,7 @@ public class MensagemController {
 		//Salva a mensagem
 		mRepository.save(novaMensagem);
 		
-		return("Mensagem adicionada!!!");
+		return(novaMensagem);
 	}
 	
 	@ApiOperation(value = "Deleta a mensagem com o id como parâmetro", response = Iterable.class, tags = "deletaMensagem")

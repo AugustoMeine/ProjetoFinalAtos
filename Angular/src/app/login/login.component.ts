@@ -12,17 +12,24 @@ import { Component, OnInit} from '@angular/core';
 export class LoginComponent implements OnInit {
 
   router: Router
-  usuario: Usuario[]
   erro: any
+
+  usuario: Usuario[]
+  usuarioLogado: Usuario
 
   email: string
   senha: string
 
-  constructor(private usuariologadoServico: UsuarioLogadoService, private usuarioServico:UsuarioService, router:Router) { 
+  constructor(private usuarioLogadoServico: UsuarioLogadoService, private usuarioServico:UsuarioService, router:Router) { 
     this.router = router
   }
 
   ngOnInit(): void {
+    //Se não existir usuário logado ele direciona para o login
+    this.usuarioLogado = this.usuarioLogadoServico.getUsuarioLogado()
+    if(this.usuarioLogado){
+      this.router.navigate(['Bate-papo'])
+    }
   }
 
   verificarLogin(){
@@ -35,7 +42,7 @@ export class LoginComponent implements OnInit {
               this.usuarioServico.logaUsuario(aux.idUsuario).subscribe(
                 (data: Usuario)=>{
                   console.log("Data >> " + data)
-                  this.usuariologadoServico.setUsuarioLogado(data)
+                  this.usuarioLogadoServico.setUsuarioLogado(data)
                   this.router.navigate(['Bate-papo'])
                 },
                 (error: any)=>{

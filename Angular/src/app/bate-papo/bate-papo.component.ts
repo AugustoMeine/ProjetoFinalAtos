@@ -21,16 +21,18 @@ export class BatePapoComponent implements OnInit {
   listaUsuario: Usuario[]
   listaMensagem: Mensagem[]
   listaAmigosDoUsuario: Usuario[] 
+  listaMensagensTrocadas: Mensagem[]
+
   usuarioLogado: Usuario
   usuarioConversa: Usuario
   
-
   nomeUsuarioGerenciamento: string
   mensagemTextArea: string
 
   constructor(private usuarioLogadoServico: UsuarioLogadoService, private amigoServico: AmigoService, private usuarioServico: UsuarioService, private mensagemServico: MensagemService, router: Router) { 
     this.router = router
     this.listaAmigosDoUsuario = []
+    this.listaMensagensTrocadas = []
   }
 
   ngOnInit(): void {
@@ -41,11 +43,11 @@ export class BatePapoComponent implements OnInit {
       this.atualizarListaUsuario()
       this.atualizarListaMensagem()
       this.atualizarListaAmigosDoUsuario()
+      this.atualizarMensagensTrocadas() 
     }
     else{
       this.router.navigate([''])
     }
-    
   }
 
   atualizarListaAmigos(){
@@ -77,8 +79,8 @@ export class BatePapoComponent implements OnInit {
   atualizarListaMensagem(){
     this.mensagemServico.getMensagens().subscribe(
       (data: Mensagem[])=>{
-        this.listaMensagem = data
-        console.log("Lista de mensagens atualizada >> " + data)
+        this.listaMensagem = data 
+        console.log("Lista de mensagens atualizada!!!")
       },
       (error: any)=>{
         this.erro = error
@@ -112,6 +114,19 @@ export class BatePapoComponent implements OnInit {
     )
   }
 
+  atualizarMensagensTrocadas(){
+    //verifica as mensagens que foram trocadas entre o usuário e o destinatário
+    this.listaMensagensTrocadas = []
+    console.log(this.listaMensagem)
+    for(let auxMensagem of this.listaMensagem){
+      if(
+        ((auxMensagem.idUsuarioDestinatario == this.usuarioLogado.idUsuario) || (auxMensagem.idUsuarioDestinatario == this.usuarioConversa.idUsuario)) && ((auxMensagem.idUsuarioRemetente == this.usuarioLogado.idUsuario) || (auxMensagem.idUsuarioRemetente == this.usuarioConversa.idUsuario))
+      ){
+        this.listaMensagensTrocadas.push(auxMensagem)
+      }
+    }
+  }
+
   adicionarAmigo(){
     //Verifica se o nome existe
     if(!this.nomeUsuarioGerenciamento){
@@ -121,6 +136,7 @@ export class BatePapoComponent implements OnInit {
       //Acha o ID do usuário que irá ser adicionado com base no nome digitado
       for(let aux of this.listaUsuario){
         if(aux.nome === this.nomeUsuarioGerenciamento){
+          
           //Adiciona o amigo
           this.amigoServico.adicionaAmigo(this.usuarioLogado.idUsuario, aux.idUsuario).subscribe(
             (data: Amigo)=>{
@@ -164,21 +180,40 @@ export class BatePapoComponent implements OnInit {
   }
 
   amigoSelecionado(idUsuarioAmigo: number){
-    console.log(idUsuarioAmigo)
+    if(idUsuarioAmigo){
+      this.usuarioServico.getUsuario(idUsuarioAmigo).subscribe(
+        (data: Usuario)=>{
+          this.usuarioConversa = data
+          console.log("UsuarioConversa foi selecionado >> " + this.usuarioConversa)
+          this.atualizarMensagensTrocadas()
+        },
+        (error: any)=>{
+          this.erro = error 
+          console.log("Erro >> " + error)
+        }
+      )
+    }
+    else{
+      console.log("Não existe amigo selecionado!!!")
+    }
   }
 
-  enviarMensagem(){
-    if(this.mensagemTextArea){
+  enviarMensagem(){ 
+    this.atualizarMensagensTrocadas()
+    if((this.mensagemTextArea)&&(this.usuarioConversa)){ 
       this.mensagemServico.adicionaMensagem(this.usuarioLogado.idUsuario,this.usuarioConversa.idUsuario,this.mensagemTextArea).subscribe(
         (data: Mensagem)=>{
-          console.log("Mensagem enviada >> " + data)
+          console.log("Mensagem enviada !!!")
+          this.mensagemTextArea = "";   
+          this.listaMensagensTrocadas.push(data)
+          this.atualizarListaMensagem()        
         },
         (error: any)=>{
           this.erro = error
           console.log("Erro >> " + error)
+          console.log(this.erro)
         }
-      )
-      this.mensagemTextArea = "";
+      )   
     }
     else{
       console.log("Mensagem inválida!!!")
@@ -187,5 +222,9 @@ export class BatePapoComponent implements OnInit {
 
   limparMensagem(){
     this.mensagemTextArea = "";
+  }
+
+  perfil(){
+    this.router.navigate(['Perfil'])
   }
 }

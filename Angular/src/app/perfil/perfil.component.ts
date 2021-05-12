@@ -94,15 +94,17 @@ export class PerfilComponent implements OnInit {
         this.usuarioServico.deletaUsuario(this.usuarioLogado.idUsuario).subscribe(
           (data: string)=>{
             console.log("Data >> " + data)
+            this.usuarioLogadoServico.setUsuarioLogado(null)
+            console.log("Usuário deletado!!!")
+            //Envia para a tela de login
+            this.router.navigate([''])
           },
           (error: any)=>{
             this.erro = error
             console.log("Erro >> " + this.erro)
           }
         )
-        console.log("Usuário deletado!!!")
-        //Envia para a tela de login
-        this.router.navigate([''])
+        
       }
     }
   }
@@ -112,6 +114,7 @@ export class PerfilComponent implements OnInit {
       (data: Usuario)=>{
         console.log("Data >> " + data)
         this.router.navigate([''])
+        this.usuarioLogadoServico.setUsuarioLogado(null)
       },
       (error: any)=>{
         this.erro = error
@@ -120,4 +123,7 @@ export class PerfilComponent implements OnInit {
     )
   }
 
+  batePapo(){
+    this.router.navigate(['Bate-papo'])
+  }
 }
