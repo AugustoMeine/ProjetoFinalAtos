@@ -92,11 +92,10 @@ export class PerfilComponent implements OnInit {
       }
       else{
         this.usuarioServico.deletaUsuario(this.usuarioLogado.idUsuario).subscribe(
-          (data: string)=>{
+          (data: boolean)=>{
             console.log("Data >> " + data)
-            this.usuarioLogadoServico.setUsuarioLogado(null)
             console.log("Usuário deletado!!!")
-            //Envia para a tela de login
+            this.usuarioLogadoServico.setUsuarioLogado(null)
             this.router.navigate([''])
           },
           (error: any)=>{

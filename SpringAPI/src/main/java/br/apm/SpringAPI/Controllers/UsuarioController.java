@@ -139,17 +139,17 @@ public class UsuarioController {
 	
 	@ApiOperation(value = "Deleta o Usuário com o id como parâmetro", response = Iterable.class, tags = "deletaUsuario")
 	@GetMapping("/Deletar/{idUsuario}")
-	public String deletaUsuario(@PathVariable long idUsuario){
+	public boolean deletaUsuario(@PathVariable long idUsuario){
 		List<Usuario> listaUsuario = uRepository.findAll();
 	
 		//Verifica se o idUsuario existe
 		for(Usuario auxId : listaUsuario) {
 			if(auxId.getIdUsuario() == idUsuario) {
 				uRepository.deleteById(idUsuario);
-				return("Usuário deletado!!!");
+				return(true);
 			}
 		}
-		return("Usuário não encontrado!!!");
+		return(false);
 	}
 	
 	@ApiOperation(value = "Altera o Usuário para LOGADO com o id como parâmetro", response = Iterable.class, tags = "logaUsuario")

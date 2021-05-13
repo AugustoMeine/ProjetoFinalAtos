@@ -23,10 +23,13 @@
     width: 100%;
     height: 80%;
     overflow:auto;
+    background-color: rgb(15, 15, 15);
 }
 .conversas{
     width: 100%;
     height: auto;
+    font-size:25px;
+    
 }
 .conversaRemetente{
     text-align: right;
@@ -45,18 +48,21 @@
     width: 80%;
     height: 100%;
     float: left;
+    border-radius: 0px;
 }
 
 .divBatePapoMensagemBotaoEnviar{
     width: 20%;
     height: 50%;
     float: right;
+    border-radius: 0px;
 }
 
 .divBatePapoMensagemBotaoLimpar{
     width: 20%;
     height: 50%;
     float: right;
+    border-radius: 0px;
 }
 .divAmigos{
     border:1px solid black;
@@ -75,11 +81,13 @@
 .divAmigosListaTitulo{
     background-color: grey;
     border:1px solid black;
+    color: darkred;
+    align-items: center;
     text-align: center;
     width: 100%;
     height: 10%;
     margin: 0;
-    align-items: center;
+    
 }
 
 .divAmigosListaSelecionado{
@@ -90,8 +98,20 @@
 
 .divAmigosListaSelecionadoOpcoes{
     width: 100%;
-    height: 20%;
+    height: 30px;
+    border:1px solid black;
     border-radius: 0px;
+    background-color: darkgrey;
+    color: black;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+}
+.divAmigosListaSelecionadoOpcoes:hover{
+    background-color: darkolivegreen;
+}
+.divAmigosListaSelecionadoOpcoes:focus{
+    background-color: green;
 }
 
 .divAmigosGerenciamento{
@@ -106,11 +126,11 @@
     height: 40%;
     margin-top: 2.5%;
     margin-bottom: 2.5%;
+    border-radius: 0px;
     
 }
 
 .divAmigosGerenciamentoNomeBotao{
-    border:1px solid black;
     width: 100%;
     height: 50%;
 }
@@ -120,6 +140,7 @@
     width: 50%;
     height: 100%;
     float: left;
+    border-radius: 0px;
 }
 
 .divAmigosGerenciamentoNomeBotaoDeletar{
@@ -127,4 +148,5 @@
     width: 50%;
     height: 100%;
     float: right;
+    border-radius: 0px;
 }

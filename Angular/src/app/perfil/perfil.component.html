@@ -7,21 +7,21 @@
         <div class="p-field p-grid">
             <label for="nome" class="p-col-fixed" style="width:100px">Nome</label>
             <div class="p-col">
-                <input [disabled]="!atualizando" id="nome" type="text" pInputText [(ngModel)]="nome"> 
+                <input [disabled]="!atualizando" id="nome" type="text" pInputText [(ngModel)]="nome" spellcheck="false" autocomplete="off"> 
             </div>
         </div>
 
         <div class="p-field p-grid">
             <label for="email" class="p-col-fixed" style="width:100px">E-mail</label>
             <div class="p-col">
-                <input [disabled]="!atualizando" id="email" type="email" pInputText [(ngModel)]="email"> 
+                <input [disabled]="!atualizando" id="email" type="email" pInputText [(ngModel)]="email" spellcheck="false" autocomplete="off"> 
             </div>
         </div>
 
         <div class="p-field p-grid">
             <label for="senha" class="p-col-fixed" style="width:100px">Senha</label>
             <div class="p-col">
-                <input [disabled]="!atualizando" id="senha" type="password" pInputText [(ngModel)]="senha"> 
+                <input [disabled]="!atualizando" id="senha" type="password" pInputText [(ngModel)]="senha" spellcheck="false" autocomplete="off"> 
             </div>
         </div>
 
