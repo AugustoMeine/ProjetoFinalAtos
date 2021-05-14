@@ -167,6 +167,8 @@ export class BatePapoComponent implements OnInit {
           this.amigoServico.deletaAmigo(this.usuarioLogado.idUsuario, aux.idUsuario).subscribe(
             (data: string)=>{
               console.log("Amigo deletado >> " + data)
+              this.atualizarListaAmigos()
+              this.atualizarListaAmigosDoUsuario()
             },
             (error: any)=>{
               this.erro = error
